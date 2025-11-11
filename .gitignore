@@ -1,8 +1,7 @@
 *.pyc
 __pycache__/
 
-env/
-venv/
+.env/
 
 db.sqlite3
 
@@ -10,7 +9,6 @@ db.sqlite3
 */migrations/*.pyc
 */migrations/__pycache__/
 
-.vscode/
 .idea/
 
 *.log
