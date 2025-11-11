@@ -27,7 +27,7 @@ python manage.py runserver
 5. Accéder à l’application
 
 Espace membre : http://127.0.0.1:8000/medias/
-Espace bibliothécaire : http://127.0.0.1:8000/bibliothecaire/
- (login requis)
-Espace Django administration : http://127.0.0.1:8000/admin/
- (login requis)
+
+Espace bibliothécaire : http://127.0.0.1:8000/bibliothecaire/ (login requis)
+
+Espace Django administration : http://127.0.0.1:8000/admin/ (login requis)
