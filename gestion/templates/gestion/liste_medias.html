@@ -1,0 +1,41 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+<h1>📚 Tous les médias par catégorie</h1>
+
+<h2>📚 Livres</h2>
+<ul>
+{% for livre in livres %}
+  <li>{{ livre.name }} — {{ livre.auteur }} {% if livre.est_disponible %}✅{% else %}❌{% endif %}</li>
+{% empty %}
+  <li>Aucun livre trouvé.</li>
+{% endfor %}
+</ul>
+
+<h2>💿 CDs</h2>
+<ul>
+{% for cd in cds %}
+  <li>{{ cd.name }} — {{ cd.artiste }} {% if cd.est_disponible %}✅{% else %}❌{% endif %}</li>
+{% empty %}
+  <li>Aucun CD trouvé.</li>
+{% endfor %}
+</ul>
+
+<h2>🎬 DVDs</h2>
+<ul>
+{% for dvd in dvds %}
+  <li>{{ dvd.name }} — {{ dvd.realisateur }} {% if dvd.est_disponible %}✅{% else %}❌{% endif %}</li>
+{% empty %}
+  <li>Aucun DVD trouvé.</li>
+{% endfor %}
+</ul>
+
+<h2>🎲 Jeux de plateau</h2>
+<ul>
+{% for jeu in jeux %}
+  <li>{{ jeu.name }} — {{ jeu.createur }} (non empruntable)</li>
+{% empty %}
+  <li>Aucun jeu trouvé.</li>
+{% endfor %}
+</ul>
+{% endblock %}

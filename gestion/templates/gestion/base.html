@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Médiathèque</title>
+</head>
+<body>
+    <header>
+        <h2>Notre Livre, Notre Média 📚</h2>
+        <nav>
+            <a href="{% url 'liste_medias' %}">Tous les médias</a> |
+            <a href="{% url 'accueil_bibliothecaire' %}">Espace Bibliothécaire</a>
+        </nav>
+        <hr>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <hr>
+        <p>&copy; 2025 Médiathèque</p>
+    </footer>
+
+    <script>
+        setTimeout(function() {
+            const messages = document.getElementById('messages');
+            if(messages){
+                messages.style.transition = "opacity 1s ease-out";
+                messages.style.opacity = 0;
+                setTimeout(() => messages.style.display = "none", 1000);
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

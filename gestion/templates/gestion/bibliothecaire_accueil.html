@@ -1,0 +1,20 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <p>
+            Connecté en tant que {{ user.username }} |
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Se déconnecter</button>
+            </form>
+        </p>
+    {% endif %}
+
+    <h1>Espace Bibliothécaire</h1>
+
+    <ul>
+        <li><a href="{% url 'bibliothecaire_medias' %}">Voir tous les médias</a></li>
+        <li><a href="{% url 'liste_membres' %}">Voir les membres</a></li>
+    </ul>
+{% endblock %}

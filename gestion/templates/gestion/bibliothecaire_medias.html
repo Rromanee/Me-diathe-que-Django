@@ -1,0 +1,126 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+<h1>💡 Page Bibliothécaire – Médias</h1>
+
+{% if messages %}
+<ul id="messages">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<h2>📚 Livres</h2>
+<ul>
+{% for livre in livres %}
+<li>{{ livre.name }} — {{ livre.auteur }}
+    {% if livre.est_disponible %}
+        ✅ Disponible
+        <form method="POST" action="{% url 'emprunter_media' 'livre' livre.id %}" style="display:inline;">
+            {% csrf_token %}
+            <select name="membre_id">
+                <option value="0">-- Sélectionner un membre --</option>
+                {% for membre in membres %}
+                    <option value="{{ membre.id }}">{{ membre.prenom }} {{ membre.nom }}</option>
+                {% endfor %}
+            </select>
+            <button>📌 Emprunter</button>
+        </form>
+    {% else %}
+        {% if livre.emprunt %}
+            ❌ Emprunté — par <strong>{{ livre.emprunt.membre.prenom }} {{ livre.emprunt.membre.nom }}</strong>
+            <a href="{% url 'rendre_media' 'livre' livre.id %}">↩️ Retourner</a>
+        {% endif %}
+    {% endif %}
+    | <a href="{% url 'modifier_media' 'livre' livre.id %}">✏ Modifier</a>
+    | <a href="{% url 'supprimer_media' 'livre' livre.id %}">🗑️ Supprimer</a>
+</li>
+{% empty %}
+<li>Aucun livre</li>
+{% endfor %}
+</ul>
+
+<h2>💿 CDs</h2>
+<ul>
+{% for cd in cds %}
+<li>{{ cd.name }} — {{ cd.artiste }}
+    {% if cd.est_disponible %}
+        ✅ Disponible
+        <form method="POST" action="{% url 'emprunter_media' 'cd' cd.id %}" style="display:inline;">
+            {% csrf_token %}
+            <select name="membre_id">
+                <option value="0">-- Sélectionner un membre --</option>
+                {% for membre in membres %}
+                    <option value="{{ membre.id }}">{{ membre.prenom }} {{ membre.nom }}</option>
+                {% endfor %}
+            </select>
+            <button>📌 Emprunter</button>
+        </form>
+    {% else %}
+        {% if cd.emprunt %}
+            ❌ Emprunté — par <strong>{{ cd.emprunt.membre.prenom }} {{ cd.emprunt.membre.nom }}</strong>
+            <a href="{% url 'rendre_media' 'cd' cd.id %}">↩️ Retourner</a>
+        {% endif %}
+    {% endif %}
+    | <a href="{% url 'modifier_media' 'cd' cd.id %}">✏ Modifier</a>
+    | <a href="{% url 'supprimer_media' 'cd' cd.id %}">🗑️ Supprimer</a>
+</li>
+{% empty %}
+<li>Aucun CD</li>
+{% endfor %}
+</ul>
+
+<h2>🎬 DVDs</h2>
+<ul>
+{% for dvd in dvds %}
+<li>{{ dvd.name }} — {{ dvd.realisateur }}
+    {% if dvd.est_disponible %}
+        ✅ Disponible
+        <form method="POST" action="{% url 'emprunter_media' 'dvd' dvd.id %}" style="display:inline;">
+            {% csrf_token %}
+            <select name="membre_id">
+                <option value="0">-- Sélectionner un membre --</option>
+                {% for membre in membres %}
+                    <option value="{{ membre.id }}">{{ membre.prenom }} {{ membre.nom }}</option>
+                {% endfor %}
+            </select>
+            <button>📌 Emprunter</button>
+        </form>
+    {% else %}
+        {% if dvd.emprunt %}
+            ❌ Emprunté — par <strong>{{ dvd.emprunt.membre.prenom }} {{ dvd.emprunt.membre.nom }}</strong>
+            <a href="{% url 'rendre_media' 'dvd' dvd.id %}">↩️ Retourner</a>
+        {% endif %}
+    {% endif %}
+    | <a href="{% url 'modifier_media' 'dvd' dvd.id %}">✏ Modifier</a>
+    | <a href="{% url 'supprimer_media' 'dvd' dvd.id %}">🗑️ Supprimer</a>
+</li>
+{% empty %}
+<li>Aucun DVD</li>
+{% endfor %}
+</ul>
+
+<h2>🎲 Jeux de plateau</h2>
+<ul>
+{% for jeu in jeux %}
+<li>{{ jeu.name }} — {{ jeu.createur }}
+    | <a href="{% url 'modifier_media' 'jeuDePlateau' jeu.id %}">✏ Modifier</a>
+    | <a href="{% url 'supprimer_media' 'jeuDePlateau' jeu.id %}">🗑️ Supprimer</a>
+</li>
+{% empty %}
+<li>Aucun jeu</li>
+{% endfor %}
+</ul>
+
+<p>
+<a href="{% url 'ajouter_media' 'livre' %}">➕ Ajouter un Livre</a> |
+<a href="{% url 'ajouter_media' 'cd' %}">➕ Ajouter un CD</a> |
+<a href="{% url 'ajouter_media' 'dvd' %}">➕ Ajouter un DVD</a> |
+<a href="{% url 'ajouter_media' 'jeuDePlateau' %}">➕ Ajouter un Jeu de Plateau</a>
+</p>
+
+<p>
+    <a href="{% url 'accueil_bibliothecaire' %}">⬅ Retour espace bibliothécaire</a>
+</p>
+{% endblock %}

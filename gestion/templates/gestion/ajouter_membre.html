@@ -1,0 +1,15 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+    <h1>➕ Ajouter un membre</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enregistrer</button>
+    </form>
+
+    <p>
+        <a href="{% url 'liste_membres' %}">⬅ Retour à la liste des membres</a>
+    </p>
+{% endblock %}

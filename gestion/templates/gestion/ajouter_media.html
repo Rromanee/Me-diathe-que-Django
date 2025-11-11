@@ -1,0 +1,15 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+<h1>➕ {% if type_media %}{{ type_media|capfirst }}{% else %}Média{% endif %}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enregistrer</button>
+</form>
+
+    <p>
+        <a href="{% url 'bibliothecaire_medias' %}">⬅ Retour à la liste des médias</a>
+    </p>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "gestion/base.html" %}
+
+{% block content %}
+<h1>Liste des membres</h1>
+
+{% if messages %}
+<ul id="messages">
+{% for message in messages %}
+    <li>{{ message }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<a href="{% url 'ajouter_membre' %}">➕ Ajouter un nouveau membre</a>
+
+{% if membres %}
+<table border="1" cellpadding="5" cellspacing="0">
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Actions</th>
+  </tr>
+  {% for membre in membres %}
+  <tr>
+    <td>{{ membre.nom }}</td>
+    <td>{{ membre.prenom }}</td>
+    <td>
+      <a href="{% url 'modifier_membre' membre.id %}">✏ Modifier</a> |
+      <a href="{% url 'supprimer_membre' membre.id %}" onclick="return confirm('Voulez-vous vraiment supprimer ce membre ?');">❌ Supprimer</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>Aucun membre.</p>
+{% endif %}
+
+<a href="{% url 'accueil_bibliothecaire' %}">⬅ Retour espace bibliothécaire</a>
+{% endblock %}
